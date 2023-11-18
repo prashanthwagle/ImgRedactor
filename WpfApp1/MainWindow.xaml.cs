@@ -29,46 +29,51 @@ namespace SprayPaintApp
 
         private void BtnLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Uri fileUri = new Uri(openFileDialog.FileName);
+                imgCanvas.Source = new BitmapImage(fileUri);
+            }
         }
 
         private void BtnClearCanvas_Click(object sender, RoutedEventArgs e)
         {
-
+            canvas.Children.Clear();
         }
 
         private void PointerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Console.WriteLine("Button clicked!");
         }
 
         private void SprayBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Console.WriteLine("Button clicked!");
         }
 
 
 
         private void EraserBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Console.WriteLine("Button clicked!");
         }
 
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-
+            Console.WriteLine("Button clicked!");
         }
 
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            Console.WriteLine("Button clicked!");
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Console.WriteLine("Button clicked!");
         }
 
 
