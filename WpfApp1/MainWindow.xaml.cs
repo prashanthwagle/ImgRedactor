@@ -44,19 +44,42 @@ namespace SprayPaintApp
 
         private void PointerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Button clicked!");
+            SetEditAction(EditAction.Pointer);
         }
 
         private void SprayBtn_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Button clicked!");
+            SetEditAction(EditAction.Spray);
         }
-
-
 
         private void EraserBtn_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Button clicked!");
+            SetEditAction(EditAction.Eraser);
+        }
+
+        private void SetEditAction(EditAction action)
+        {
+            PointerBtn.IsChecked = false;
+            SprayBtn.IsChecked = false;
+            EraserBtn.IsChecked = false;
+
+            currentAction = action;
+
+            switch (action)
+            {
+                case EditAction.Pointer:
+                    PointerBtn.IsChecked = true;
+                    break;
+                case EditAction.Spray:
+                    SprayBtn.IsChecked = true;
+                    break;
+
+                case EditAction.Eraser:
+                    EraserBtn.IsChecked = true;
+                    break;
+
+            }
+
         }
 
 
