@@ -138,7 +138,53 @@ namespace SprayPaintApp
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Button clicked!");
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PNG Image|*.png|JPEG Image|*.jpg;*.jpeg|Bitmap Image|*.bmp|All Files|*.*"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                SaveImage(saveFileDialog.FileName);
+            }
+        }
+
+        private void SaveImage(string filePath)
+        {
+            RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap(
+                (int)canvas.ActualWidth,
+                (int)canvas.ActualHeight,
+                96,
+                96,
+                PixelFormats.Default);
+
+            renderTargetBitmap.Render(canvas);
+
+            BitmapEncoder? encoder = null;
+            string fileExtension = System.IO.Path.GetExtension(filePath).ToLower();
+
+            switch (fileExtension)
+            {
+                case ".png":
+                    encoder = new PngBitmapEncoder();
+                    break;
+                case ".jpg":
+                case ".jpeg":
+                    encoder = new JpegBitmapEncoder();
+                    break;
+                default:
+                    MessageBox.Show("Unsupported file format.");
+                    return;
+            }
+
+            encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                encoder.Save(fileStream);
+            }
+
+            MessageBox.Show($"Saved Successfully to {filePath}");
         }
 
 
