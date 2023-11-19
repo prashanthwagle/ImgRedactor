@@ -1,4 +1,4 @@
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -22,8 +22,15 @@ namespace SprayPaintApp
         }
         private EditAction currentAction { get; set; }
 
+
         //Spraybrush Thickness: Default 1, can range from 1-10
         private double _brushThickness = 1;
+        public double BrushThickness
+        {
+            get { return _brushThickness; }
+            set { _brushThickness = value; }
+        }
+
 
         public MainWindow()
         {
@@ -99,8 +106,8 @@ namespace SprayPaintApp
 
         private void SprayPaint(Point position)
         {
-            int sprayRadius = 5;
-            int sprayDensity = 10;
+            double sprayRadius = BrushThickness;
+            int sprayDensity = (int)Math.Ceiling(sprayRadius * 2);
             Random random = new Random();
 
             for (int i = 0; i < sprayDensity; i++)
@@ -126,7 +133,7 @@ namespace SprayPaintApp
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Console.WriteLine("Button clicked!");
+            BrushThickness = mySlider.Value;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
