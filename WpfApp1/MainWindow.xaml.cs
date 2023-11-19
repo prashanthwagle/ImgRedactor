@@ -221,7 +221,7 @@ namespace SprayPaintApp
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error: {ex.Message}");
+                    Console.WriteLine($"Error AutoSaving file: {ex.Message}");
                 }
             }
         }
@@ -251,7 +251,7 @@ namespace SprayPaintApp
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Error AutoRestoring file: {ex.Message}");
             }
         }
 
