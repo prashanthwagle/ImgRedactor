@@ -85,7 +85,39 @@ namespace SprayPaintApp
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            Console.WriteLine("Button clicked!");
+            if (currentAction == EditAction.Spray)
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    SprayPaint(e.GetPosition(canvas));
+                }
+            }
+        }
+
+        private void SprayPaint(Point position)
+        {
+            int sprayRadius = 5;
+            int sprayDensity = 10;
+            Random random = new Random();
+
+            for (int i = 0; i < sprayDensity; i++)
+            {
+                double angle = random.NextDouble() * 2 * Math.PI;
+                double radius = Math.Sqrt(random.NextDouble()) * sprayRadius;
+
+                double x = position.X + radius * Math.Cos(angle);
+                double y = position.Y + radius * Math.Sin(angle);
+
+                Ellipse ellipse = new Ellipse
+                {
+                    Width = 3,
+                    Height = 3,
+                    Fill = new SolidColorBrush(Colors.Aqua),
+                    Margin = new Thickness(x, y, 0, 0)
+                };
+
+                canvas.Children.Add(ellipse);
+            }
         }
 
 
