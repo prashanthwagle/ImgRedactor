@@ -31,7 +31,7 @@
                 <ToggleButton Name="SprayBtn" Padding="10" Margin="10,0,10,0" ToolTip="Pen" Background="White" Click="SprayBtn_Click"/>
                 <ToggleButton Name="EraserBtn" Padding="10" Margin="10,0,10,0" ToolTip="Eraser" Background="White" Click="EraserBtn_Click"/>
             </StackPanel>
-            <Slider HorizontalAlignment="Stretch" Margin="10" x:Name="mySlider" Width="85" Minimum="0" Maximum="10" ValueChanged="Slider_ValueChanged"/>
+            <Slider HorizontalAlignment="Stretch" Margin="10" x:Name="mySlider" Width="85" Minimum="1" Maximum="10" ValueChanged="Slider_ValueChanged"/>
             <Button Content="Save" Click="SaveButton_Click"/>
         </StackPanel>
     </Grid>
