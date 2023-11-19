@@ -187,6 +187,46 @@ namespace SprayPaintApp
             MessageBox.Show($"Saved Successfully to {filePath}");
         }
 
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            SaveAppState();
+        }
+
+        private void SaveAppState()
+        {
+            if (canvas != null)
+            {
+                RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap(
+                    (int)canvas.ActualWidth,
+                    (int)canvas.ActualHeight,
+                    96,
+                    96,
+                    PixelFormats.Pbgra32);
+
+                renderTargetBitmap.Render(canvas);
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+
+                string dirPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "finalcover_llc");
+                string FILENAME = "$temp$";
+                string hiddenFilePath = System.IO.Path.Combine(dirPath, FILENAME);
+
+                try
+                {
+                    Directory.CreateDirectory(dirPath);
+                    using (FileStream fs = new FileStream(hiddenFilePath, FileMode.Create))
+                    {
+                        encoder.Save(fs);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+            }
+        }
+
+
 
 
     }
