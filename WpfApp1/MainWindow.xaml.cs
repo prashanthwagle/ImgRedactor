@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -15,12 +15,15 @@ namespace SprayPaintApp
 {
     public partial class MainWindow : Window
     {
+        //Current Action: Point,Spray,Erase
         public enum EditAction
         {
             Pointer, Spray, Eraser
         }
         private EditAction currentAction { get; set; }
 
+        //Spraybrush Thickness: Default 1, can range from 1-10
+        private double _brushThickness = 1;
 
         public MainWindow()
         {
