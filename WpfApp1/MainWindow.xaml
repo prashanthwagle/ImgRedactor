@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SprayPaintApp"
         mc:Ignorable="d"
         Closing="MainWindow_Closing"
+        Loaded="MainWindow_Loaded"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>

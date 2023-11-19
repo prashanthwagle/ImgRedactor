@@ -226,8 +226,37 @@ namespace SprayPaintApp
             }
         }
 
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            RestoreAppState();
+        }
 
+        private void RestoreAppState()
+        {
+            string dirPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "finalcover_llc");
+            string FILENAME = "$temp$";
+            string hiddenFilePath = System.IO.Path.Combine(dirPath, FILENAME);
 
+            try
+            {
+                if (File.Exists(hiddenFilePath))
+                {
+                    BitmapImage restoredImage = new BitmapImage(new Uri(hiddenFilePath));
+                    imgCanvas.Source = restoredImage;
+                    canvas.Width = restoredImage.PixelWidth;
+                    canvas.Height = restoredImage.PixelHeight;
+                    imgCanvas.Width = restoredImage.PixelWidth;
+                    imgCanvas.Height = restoredImage.PixelHeight;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+  
 
     }
+
 }
