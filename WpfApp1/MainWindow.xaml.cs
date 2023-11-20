@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -241,13 +241,24 @@ namespace SprayPaintApp
             {
                 if (File.Exists(hiddenFilePath))
                 {
-                    BitmapImage restoredImage = new BitmapImage(new Uri(hiddenFilePath));
-                    imgCanvas.Source = restoredImage;
-                    canvas.Width = restoredImage.PixelWidth;
-                    canvas.Height = restoredImage.PixelHeight;
-                    imgCanvas.Width = restoredImage.PixelWidth;
-                    imgCanvas.Height = restoredImage.PixelHeight;
+                    using (FileStream fs = new FileStream(hiddenFilePath, FileMode.Open, FileAccess.Read))
+                    {
+                        BitmapImage restoredImage = new BitmapImage();
+                        restoredImage.BeginInit();
+                        restoredImage.CacheOption = BitmapCacheOption.OnLoad;
+                        restoredImage.StreamSource = fs;
+                        restoredImage.EndInit();
+
+                        imgCanvas.Source = restoredImage;
+                        canvas.Width = restoredImage.PixelWidth;
+                        canvas.Height = restoredImage.PixelHeight;
+                        imgCanvas.Width = restoredImage.PixelWidth;
+                        imgCanvas.Height = restoredImage.PixelHeight;
+                    }
+
+                    File.Delete(hiddenFilePath);
                 }
+                
             }
             catch (Exception ex)
             {
