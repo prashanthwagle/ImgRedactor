@@ -37,6 +37,31 @@ namespace SprayPaintApp
             InitializeComponent();
         }
 
+        private Image CreateImageOnCanvas(BitmapImage bitmapImage)
+        {
+            Image imgCanvas = new Image();
+            imgCanvas.Source = bitmapImage;
+            canvas.Children.Clear();
+            canvas.Children.Add(imgCanvas);
+
+            Binding widthBinding = new Binding("ActualWidth")
+            {
+                RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof(ScrollViewer), 1)
+            };
+
+            Binding heightBinding = new Binding("ActualHeight")
+            {
+                RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof(ScrollViewer), 1)
+            };
+
+            imgCanvas.SetBinding(FrameworkElement.WidthProperty, widthBinding);
+            imgCanvas.SetBinding(FrameworkElement.HeightProperty, heightBinding);
+
+            return imgCanvas;
+        }
+
+
+
         private void BtnLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
