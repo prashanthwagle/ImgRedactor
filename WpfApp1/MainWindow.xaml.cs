@@ -131,10 +131,16 @@ namespace SprayPaintApp
                 {
                     SprayPaint(e.GetPosition(paintCanvas));
                 }
+            } else if (currentAction == EditAction.Eraser)
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    EraseSprayPaint(e.GetPosition(paintCanvas));
+                }
             }
         }
 
-        private void SprayPaint(Point position)
+        private void SprayPaint(Point mousePosition)
         {
             double sprayRadius = BrushThickness;
             int sprayDensity = (int)Math.Ceiling(sprayRadius * 2);
@@ -145,8 +151,8 @@ namespace SprayPaintApp
                 double angle = random.NextDouble() * 2 * Math.PI;
                 double radius = Math.Sqrt(random.NextDouble()) * sprayRadius;
 
-                double x = position.X + radius * Math.Cos(angle);
-                double y = position.Y + radius * Math.Sin(angle);
+                double x = mousePosition.X + radius * Math.Cos(angle);
+                double y = mousePosition.Y + radius * Math.Sin(angle);
 
                 Ellipse ellipse = new Ellipse
                 {
@@ -156,9 +162,34 @@ namespace SprayPaintApp
                     Margin = new Thickness(x, y, 0, 0)
                 };
 
-                canvas.Children.Add(ellipse);
+                paintCanvas.Children.Add(ellipse);
             }
         }
+
+        private void EraseSprayPaint(Point mousePosition)
+        {
+            double eraseRadius = 5.0;
+            List<UIElement> elementsToRemove = new List<UIElement>();
+
+            foreach (UIElement element in paintCanvas.Children)
+            {
+                if (element is Ellipse ellipse)
+                {
+                    Point ellipsePoint = element.TransformToAncestor(paintCanvas).Transform(new Point(0, 0));
+
+                    if (Math.Abs(ellipsePoint.X - mousePosition.X) < eraseRadius && Math.Abs(ellipsePoint.Y - mousePosition.Y) < eraseRadius)
+                    {
+                        elementsToRemove.Add(ellipse);
+                    }
+                }
+            }
+
+            foreach (UIElement elementToRemove in elementsToRemove)
+            {
+                paintCanvas.Children.Remove(elementToRemove);
+            }
+        }
+
 
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
