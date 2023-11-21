@@ -257,40 +257,45 @@ namespace SprayPaintApp
             RestoreAppState();
         }
 
+
         private void RestoreAppState()
         {
             string dirPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "finalcover_llc");
-            string FILENAME = "$temp$";
+            string FILENAME = "$temp$.xaml";
             string hiddenFilePath = System.IO.Path.Combine(dirPath, FILENAME);
+            List<UIElement> restoredElements = new List<UIElement>();
 
             try
             {
-                if (File.Exists(hiddenFilePath))
+                using (FileStream fs = new FileStream(hiddenFilePath, FileMode.Open, FileAccess.Read))
                 {
-                    using (FileStream fs = new FileStream(hiddenFilePath, FileMode.Open, FileAccess.Read))
+                    Canvas loadedCanvas = XamlReader.Load(fs) as Canvas;
+
+                    Console.WriteLine(loadedCanvas.Children);
+
+                    if (loadedCanvas != null)
                     {
-                        BitmapImage restoredImage = new BitmapImage();
-                        restoredImage.BeginInit();
-                        restoredImage.CacheOption = BitmapCacheOption.OnLoad;
-                        restoredImage.StreamSource = fs;
-                        restoredImage.EndInit();
 
+                        foreach (UIElement child in loadedCanvas.Children)
+                        {
+                            restoredElements.Add(child);
+                  
+                        }
 
-                        Image imgCanvas = CreateImageOnCanvas(restoredImage);
-                        imgCanvas.Source = restoredImage;
-                        canvas.Width = restoredImage.PixelWidth;
-                        canvas.Height = restoredImage.PixelHeight;
-                        imgCanvas.Width = restoredImage.PixelWidth;
-                        imgCanvas.Height = restoredImage.PixelHeight;
+                        foreach (UIElement child in restoredElements)
+                        {
+                            loadedCanvas.Children.Remove(child);
+
+                            paintCanvas.Children.Add(child);
+                        }
+
                     }
-
-                    File.Delete(hiddenFilePath);
                 }
                 
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error AutoRestoring file: {ex.Message}");
+                Console.WriteLine($"Error Loading file: {ex.Message}");
             }
         }
 
