@@ -68,7 +68,8 @@ namespace SprayPaintApp
             if (openFileDialog.ShowDialog() == true)
             {
                 Uri fileUri = new Uri(openFileDialog.FileName);
-                imgCanvas.Source = new BitmapImage(fileUri);
+                BitmapImage newImage = new BitmapImage(fileUri);
+                CreateImageOnCanvas(newImage);
             }
         }
 
@@ -274,6 +275,7 @@ namespace SprayPaintApp
                         restoredImage.StreamSource = fs;
                         restoredImage.EndInit();
 
+                        Image imgCanvas = CreateImageOnCanvas(restoredImage);
                         imgCanvas.Source = restoredImage;
                         canvas.Width = restoredImage.PixelWidth;
                         canvas.Height = restoredImage.PixelHeight;
