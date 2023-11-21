@@ -332,8 +332,6 @@ namespace SprayPaintApp
             }
         }
 
-  
-
     }
 
 }
