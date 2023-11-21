@@ -44,6 +44,7 @@ namespace SprayPaintApp
         {
             Image imgCanvas = new Image();
             imgCanvas.Source = bitmapImage;
+            imgCanvas.Stretch = Stretch.Uniform;
             canvas.Children.Clear();
             canvas.Children.Add(imgCanvas);
 
@@ -168,6 +169,7 @@ namespace SprayPaintApp
         private void SprayClrPickerChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             sprayPaintClr = SprayClrPicker.SelectedColor;
+            SetEditAction(EditAction.Spray);
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
