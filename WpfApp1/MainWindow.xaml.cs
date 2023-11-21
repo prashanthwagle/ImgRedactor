@@ -45,8 +45,8 @@ namespace SprayPaintApp
             Image imgCanvas = new Image();
             imgCanvas.Source = bitmapImage;
             imgCanvas.Stretch = Stretch.Uniform;
-            canvas.Children.Clear();
-            canvas.Children.Add(imgCanvas);
+            paintCanvas.Children.Clear();
+            paintCanvas.Children.Add(imgCanvas);
 
             Binding widthBinding = new Binding("ActualWidth")
             {
@@ -79,7 +79,7 @@ namespace SprayPaintApp
 
         private void BtnClearCanvas_Click(object sender, RoutedEventArgs e)
         {
-            canvas.Children.Clear();
+            paintCanvas.Children.Clear();
         }
 
         private void PointerBtn_Click(object sender, RoutedEventArgs e)
@@ -129,7 +129,7 @@ namespace SprayPaintApp
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
-                    SprayPaint(e.GetPosition(canvas));
+                    SprayPaint(e.GetPosition(paintCanvas));
                 }
             }
         }
@@ -188,13 +188,13 @@ namespace SprayPaintApp
         private void SaveImage(string filePath)
         {
             RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap(
-                (int)canvas.ActualWidth,
-                (int)canvas.ActualHeight,
+                (int)paintCanvas.ActualWidth,
+                (int)paintCanvas.ActualHeight,
                 96,
                 96,
                 PixelFormats.Default);
 
-            renderTargetBitmap.Render(canvas);
+            renderTargetBitmap.Render(paintCanvas);
 
             BitmapEncoder? encoder = null;
             string fileExtension = System.IO.Path.GetExtension(filePath).ToLower();
@@ -230,19 +230,7 @@ namespace SprayPaintApp
 
         private void SaveAppState()
         {
-            if (canvas != null)
-            {
-                RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap(
-                    (int)canvas.ActualWidth,
-                    (int)canvas.ActualHeight,
-                    96,
-                    96,
-                    PixelFormats.Pbgra32);
-
-                renderTargetBitmap.Render(canvas);
-                PngBitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-
+            if (paintCanvas != null)
                 string dirPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "finalcover_llc");
                 string FILENAME = "$temp$";
                 string hiddenFilePath = System.IO.Path.Combine(dirPath, FILENAME);
