@@ -9,8 +9,8 @@
         mc:Ignorable="d"
         Closing="MainWindow_Closing"
         Loaded="MainWindow_Loaded"
-        Title="MainWindow" Height="450" Width="800"
         ResizeMode="NoResize"
+        Title="MainWindow" Height="450" Width="800"
         fluent:AcrylicWindow.Enabled="True">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,7 +23,7 @@
                     <DropShadowEffect Color="Black" BlurRadius="15" Opacity="0.15" ShadowDepth="2"/>
                 </Grid.Effect>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <Canvas Name="canvas" Background="White" MouseMove="Canvas_MouseMove" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"/>
+                    <Canvas Name="paintCanvas" Background="White" ClipToBounds="True" MouseMove="Canvas_MouseMove" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"/>
                 </ScrollViewer>
             </Grid>
         </Border>
@@ -37,7 +37,7 @@
                 <ToggleButton Name="EraserBtn" Padding="10" Margin="8,0,8,0" ToolTip="Eraser" Background="White" Click="EraserBtn_Click" HorizontalContentAlignment="Stretch"/>
             </StackPanel>
             <Label Content="Spray Size" Margin="0,20,0,0" FontWeight="SemiBold" FontSize="12" HorizontalAlignment="Center"/>
-            <Slider HorizontalAlignment="Stretch" Margin="16,0,16,4" x:Name="mySlider" Width="85" Minimum="1" Maximum="10" ValueChanged="Slider_ValueChanged"/>
+            <Slider HorizontalAlignment="Stretch" Margin="8,0,8,4" x:Name="mySlider" Width="85" Minimum="1" Maximum="10" ValueChanged="Slider_ValueChanged"/>
             <Label Content="Spray Color" Margin="0,4,0,0" FontWeight="SemiBold" FontSize="12" HorizontalAlignment="Center"/>
             <xctk:ColorPicker Name="SprayClrPicker" SelectedColorChanged="SprayClrPickerChanged" ColorMode="ColorCanvas" ShowStandardColors="True" SelectedColor="Black" ></xctk:ColorPicker>
             <Button Content="Save Project" VerticalAlignment="Bottom" Margin="12,30,12,12" Click="SaveButton_Click" Height="30"/>
