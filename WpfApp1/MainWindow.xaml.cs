@@ -31,6 +31,9 @@ namespace SprayPaintApp
             set { _brushThickness = value; }
         }
 
+        //Variable for the Spray Brush Color
+        private Color? sprayPaintClr = Colors.Black;
+
 
         public MainWindow()
         {
@@ -148,7 +151,7 @@ namespace SprayPaintApp
                 {
                     Width = 3,
                     Height = 3,
-                    Fill = new SolidColorBrush(Colors.Aqua),
+                    Fill = new SolidColorBrush(sprayPaintClr.Value),
                     Margin = new Thickness(x, y, 0, 0)
                 };
 
@@ -160,6 +163,11 @@ namespace SprayPaintApp
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             BrushThickness = mySlider.Value;
+        }
+
+        private void SprayClrPickerChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            sprayPaintClr = SprayClrPicker.SelectedColor;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -274,6 +282,7 @@ namespace SprayPaintApp
                         restoredImage.CacheOption = BitmapCacheOption.OnLoad;
                         restoredImage.StreamSource = fs;
                         restoredImage.EndInit();
+
 
                         Image imgCanvas = CreateImageOnCanvas(restoredImage);
                         imgCanvas.Source = restoredImage;

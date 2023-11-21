@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SprayPaintApp"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Closing="MainWindow_Closing"
         Loaded="MainWindow_Loaded"
@@ -19,9 +20,7 @@
                     <DropShadowEffect Color="Black" BlurRadius="15" Opacity="0.15" ShadowDepth="2"/>
                 </Grid.Effect>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <Canvas Name="canvas" Background="White" MouseMove="Canvas_MouseMove" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
-                        <Image Name="imgCanvas" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"/>
-                    </Canvas>
+                    <Canvas Name="canvas" Background="White" MouseMove="Canvas_MouseMove" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"/>
                 </ScrollViewer>
             </Grid>
         </Border>
@@ -34,6 +33,7 @@
                 <ToggleButton Name="EraserBtn" Padding="10" Margin="10,0,10,0" ToolTip="Eraser" Background="White" Click="EraserBtn_Click"/>
             </StackPanel>
             <Slider HorizontalAlignment="Stretch" Margin="10" x:Name="mySlider" Width="85" Minimum="1" Maximum="10" ValueChanged="Slider_ValueChanged"/>
+            <xctk:ColorPicker Name="SprayClrPicker" SelectedColorChanged="SprayClrPickerChanged" ColorMode="ColorCanvas" ShowStandardColors="True" SelectedColor="Aqua" ></xctk:ColorPicker>
             <Button Content="Save" Click="SaveButton_Click"/>
         </StackPanel>
     </Grid>
