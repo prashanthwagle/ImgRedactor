@@ -231,8 +231,9 @@ namespace SprayPaintApp
         private void SaveAppState()
         {
             if (paintCanvas != null)
+            {
                 string dirPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "finalcover_llc");
-                string FILENAME = "$temp$";
+                string FILENAME = "$temp$.xaml";
                 string hiddenFilePath = System.IO.Path.Combine(dirPath, FILENAME);
 
                 try
@@ -240,7 +241,7 @@ namespace SprayPaintApp
                     Directory.CreateDirectory(dirPath);
                     using (FileStream fs = new FileStream(hiddenFilePath, FileMode.Create))
                     {
-                        encoder.Save(fs);
+                        XamlWriter.Save(paintCanvas, fs);
                     }
                 }
                 catch (Exception ex)
@@ -249,6 +250,7 @@ namespace SprayPaintApp
                 }
             }
         }
+
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
