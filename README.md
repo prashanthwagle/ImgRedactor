@@ -44,6 +44,9 @@ Video included in the email :)
 
 # Developer Information
 Prashanth Wagle
+
 Computer Science Grad Student @ University of Viginia
+
 Charlottesville, VA
+
 frk5pa@virginia.edu
