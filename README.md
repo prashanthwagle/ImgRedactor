@@ -41,3 +41,9 @@ Download the BuiltApplication.zip, extract it to a folder. Open the folder and c
 
 # Demo
 Video included in the email :)
+
+# Developer Information
+Prashanth Wagle
+Computer Science Grad Student @ University of Viginia
+Charlottesville, VA
+frk5pa@virginia.edu
