@@ -18,7 +18,7 @@ namespace SprayPaintApp
     public partial class MainWindow : Window
     {
 
-        private const string AppDataFolder = "casegaurd_llc";
+        private const string AppDataFolder = "finalcover_llc";
         private const string FileName = "$temp$.xaml";
 
         //Current Action: Point,Spray,Erase
@@ -44,6 +44,11 @@ namespace SprayPaintApp
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private Image CreateImageOnCanvas(BitmapImage bitmapImage)
@@ -82,7 +87,7 @@ namespace SprayPaintApp
                     Uri fileUri = new Uri(openFileDialog.FileName);
                     if (!File.Exists(fileUri.LocalPath))
                     {
-                        MessageBox.Show("Selected file does not exist.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ShowErrorMessage("Selected file does not exist.");
                         return;
                     }
 
@@ -92,7 +97,7 @@ namespace SprayPaintApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading image: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error loading image: {ex.Message}");
             }
         }
 
@@ -164,7 +169,7 @@ namespace SprayPaintApp
             }
             catch (Exception exception)
             {
-                MessageBox.Show($"Error in mouse move: {exception.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error in mouse move: {exception.Message}");
             }
         }
 
@@ -175,7 +180,7 @@ namespace SprayPaintApp
             {
                 if (sprayPaintClr == null)
                 {
-                    MessageBox.Show("Spray paint color is not set.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    ShowErrorMessage("Spray paint color is not set");
                     return;
                 }
 
@@ -204,7 +209,7 @@ namespace SprayPaintApp
             }
             catch (Exception exception)
             {
-                MessageBox.Show($"Error while Spraying Paint: {exception.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error while Spraying Paint: {exception.Message}");
             }
         }
 
@@ -236,11 +241,11 @@ namespace SprayPaintApp
             }
             catch (ArgumentNullException nullEx)
             {
-                MessageBox.Show($"Error while Erasing Paint: {nullEx.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error while Erasing Paint: {nullEx.Message}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error while Erasing Paint: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error while Erasing Paint: {ex.Message}");
             }
         }
 
@@ -274,15 +279,15 @@ namespace SprayPaintApp
             }
             catch (ArgumentNullException nullException)
             {
-                MessageBox.Show($"Error while saving project: {nullException.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error while saving project: {nullException.Message}");
             }
             catch (UnauthorizedAccessException unauthorizedException)
             {
-                MessageBox.Show($"Error while saving project: {unauthorizedException.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error while saving project: {unauthorizedException.Message}");
             }
             catch (Exception exception)
             {
-                MessageBox.Show($"Error while saving project: {exception.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error while saving project: {exception.Message}");
             }
         }
 
@@ -327,15 +332,15 @@ namespace SprayPaintApp
             }
             catch (UnauthorizedAccessException unauthorizedException)
             {
-                MessageBox.Show($"Error while saving image: {unauthorizedException.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error while saving image: {unauthorizedException.Message}");
             }
             catch (NotSupportedException notSupportedException)
             {
-                MessageBox.Show($"Error while saving image: {notSupportedException.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error while saving image: {notSupportedException.Message}");
             }
             catch (Exception exception)
             {
-                MessageBox.Show($"Error while saving image: {exception.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error while saving image: {exception.Message}");
             }
         }
 
@@ -364,11 +369,11 @@ namespace SprayPaintApp
                 }
                 catch (UnauthorizedAccessException unauthorizedException)
                 {
-                    MessageBox.Show($"Error autosaving file: {unauthorizedException.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    ShowErrorMessage($"Error autosaving file: {unauthorizedException.Message}");
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show($"Error autosaving file: {exception.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    ShowErrorMessage($"Error autosaving file: {exception.Message}");
                 }
             }
             
@@ -416,11 +421,11 @@ namespace SprayPaintApp
             }
             catch (UnauthorizedAccessException unauthorizedException)
             {
-                MessageBox.Show($"Error autoloading previous state: {unauthorizedException.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error autoloading previous state: {unauthorizedException.Message}");
             }
             catch (Exception exception)
             {
-                MessageBox.Show($"Error autoloading previous state: {exception.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorMessage($"Error autoloading previous state: {exception.Message}");
             }
         }
 
