@@ -88,7 +88,11 @@ namespace SprayPaintApp
         {
             try
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
+                OpenFileDialog openFileDialog = new OpenFileDialog
+                {
+                    Filter = "PNG Image|*.png|JPEG Image|*.jpg;*.jpeg|Bitmap Image|*.bmp",
+                    DefaultExt = ".png" 
+                };
                 if (openFileDialog.ShowDialog() == true)
                 {
                     Uri fileUri = new Uri(openFileDialog.FileName);
