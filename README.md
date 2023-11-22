@@ -33,7 +33,6 @@ The editing options are
 These are the online sources I referred to while building the application
 1. https://wpf-tutorial.com/
 2. https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/
-3. https://nerdparadise.com/programming/csharpforjavadevs
 4. ChatGPT for productivity
 5. Google Search
 
