@@ -176,7 +176,7 @@ namespace SprayPaintApp
         /// <param name="e">The event arguments.</param>
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            BrushThickness = mySlider.Value;
+            BrushThickness = spraySize.Value;
             SetEditAction(EditAction.Spray);
         }
 
