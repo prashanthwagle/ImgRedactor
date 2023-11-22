@@ -17,6 +17,10 @@ namespace SprayPaintApp
 {
     public partial class MainWindow : Window
     {
+
+        private const string AppDataFolder = "casegaurd_llc";
+        private const string FileName = "$temp$.xaml";
+
         //Current Action: Point,Spray,Erase
         public enum EditAction
         {
