@@ -17,7 +17,7 @@ namespace SprayPaintApp
 {
     public partial class MainWindow : Window
     {
-
+        //Constants for the file path where data is automatically saved
         private const string AppDataFolder = "finalcover_llc";
         private const string FileName = "$temp$.xaml";
 
@@ -40,11 +40,14 @@ namespace SprayPaintApp
         //Variable for the Spray Brush Color
         private Color? sprayPaintClr = Colors.Black;
 
-
+        /// <summary>
+        /// Initialization
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
+
 
         private void ShowErrorMessage(string message)
         {
@@ -76,7 +79,11 @@ namespace SprayPaintApp
         }
 
 
-
+        /// <summary>
+        /// Loads an image from file.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void BtnLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -102,25 +109,126 @@ namespace SprayPaintApp
         }
 
 
+        /// <summary>
+        /// Clears the paintCanvas
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void BtnClearCanvas_Click(object sender, RoutedEventArgs e)
         {
             paintCanvas.Children.Clear();
         }
 
+        /// <summary>
+        /// Handles selection of Pointer Button 
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void PointerBtn_Click(object sender, RoutedEventArgs e)
         {
             SetEditAction(EditAction.Pointer);
         }
 
+        /// <summary>
+        /// Handles selection of Spray button
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void SprayBtn_Click(object sender, RoutedEventArgs e)
         {
             SetEditAction(EditAction.Spray);
         }
 
+        /// <summary>
+        /// Handles the mouse movement on the canvas
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (currentAction == EditAction.Spray)
+                {
+                    if (e.LeftButton == MouseButtonState.Pressed)
+                    {
+                        SprayPaint(e.GetPosition(paintCanvas));
+                    }
+                }
+                else if (currentAction == EditAction.Eraser)
+                {
+                    if (e.LeftButton == MouseButtonState.Pressed)
+                    {
+                        EraseSprayPaint(e.GetPosition(paintCanvas));
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                ShowErrorMessage($"Error in mouse move: {exception.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Handles the slider for the size of the spray
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            BrushThickness = mySlider.Value;
+            SetEditAction(EditAction.Spray);
+        }
+
+        /// <summary>
+        /// Handles the color that has been picked to spray
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void SprayClrPickerChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            sprayPaintClr = SprayClrPicker.SelectedColor;
+            SetEditAction(EditAction.Spray);
+        }
+
+
+        /// <summary>
+        /// Handles selection of Eraser button
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void EraserBtn_Click(object sender, RoutedEventArgs e)
         {
             SetEditAction(EditAction.Eraser);
         }
+
+        /// <summary>
+        /// Event handler for the closing event of the main window.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            SaveAppState();
+        }
+
+
+        /// <summary>
+        /// Event handler for the loading event of the main window.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            RestoreAppState();
+        }
+
+
+
+        /// <summary>
+        /// Handles selection of the three actions: Pointer (for moving around the canvas), Spray (for spraying on the canvas), Eraser (for erasing the spray on the canvas)
+        /// </summary>
+        /// <param name="action">The object that triggered the event.</param>
 
         private void SetEditAction(EditAction action)
         {
@@ -148,32 +256,10 @@ namespace SprayPaintApp
         }
 
 
-        private void Canvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (currentAction == EditAction.Spray)
-                {
-                    if (e.LeftButton == MouseButtonState.Pressed)
-                    {
-                        SprayPaint(e.GetPosition(paintCanvas));
-                    }
-                }
-                else if (currentAction == EditAction.Eraser)
-                {
-                    if (e.LeftButton == MouseButtonState.Pressed)
-                    {
-                        EraseSprayPaint(e.GetPosition(paintCanvas));
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                ShowErrorMessage($"Error in mouse move: {exception.Message}");
-            }
-        }
-
-
+        /// <summary>
+        /// Initiates the spray paint action on the canvas at the specified mouse position.
+        /// </summary>
+        /// <param name="mousePosition">The position of the mouse on the canvas.</param>
         private void SprayPaint(Point mousePosition)
         {
             try
@@ -213,7 +299,10 @@ namespace SprayPaintApp
             }
         }
 
-
+        /// <summary>
+        /// Initiates the erase action on the canvas at the specified mouse position.
+        /// </summary>
+        /// <param name="mousePosition">The position of the mouse on the canvas.</param>
         private void EraseSprayPaint(Point mousePosition)
         {
             try
@@ -252,18 +341,12 @@ namespace SprayPaintApp
 
 
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            BrushThickness = mySlider.Value;
-            SetEditAction(EditAction.Spray);
-        }
 
-        private void SprayClrPickerChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
-        {
-            sprayPaintClr = SprayClrPicker.SelectedColor;
-            SetEditAction(EditAction.Spray);
-        }
-
+        /// <summary>
+        /// Handles saving of the project. A project is an image with or without spraypaint on it.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -292,7 +375,10 @@ namespace SprayPaintApp
             }
         }
 
-
+        /// <summary>
+        /// Saves the project as an image file. Allowed file types: png, jpeg/jpg
+        /// </summary>
+        /// <param name="filePath">The path where the image file will be saved.</param>
         private void SaveImage(string filePath)
         {
             try
@@ -345,12 +431,9 @@ namespace SprayPaintApp
             }
         }
 
-
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            SaveAppState();
-        }
-
+        /// <summary>
+        /// Saves the current state of the canvas to a hidden XAML file for automatically restoring the next time the app is opened
+        /// </summary>
         private void SaveAppState()
         {
             
@@ -382,12 +465,9 @@ namespace SprayPaintApp
 
 
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            RestoreAppState();
-        }
-
-
+        /// <summary>
+        /// Restores the saved application state from the hidden XAML file, if it exists
+        /// </summary>
         private void RestoreAppState()
         {
             string dirPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AppDataFolder);
@@ -418,7 +498,6 @@ namespace SprayPaintApp
                         }
                     }
                 }
-                // If the file doesn't exist, simply skip the restoration
             }
             catch (UnauthorizedAccessException unauthorizedException)
             {
