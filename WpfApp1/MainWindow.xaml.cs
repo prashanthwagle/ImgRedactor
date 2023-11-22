@@ -305,9 +305,7 @@ namespace SprayPaintApp
 
             try
             {
-                using (FileStream fs = new FileStream(hiddenFilePath, FileMode.Open, FileAccess.Read))
-                {
-                    Canvas loadedCanvas = XamlReader.Load(fs) as Canvas;
+                if (File.Exists(hiddenFilePath))
 
                     Console.WriteLine(loadedCanvas.Children);
 
