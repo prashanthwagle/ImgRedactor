@@ -36,5 +36,8 @@ These are the online sources I referred to while building the application
 4. ChatGPT for productivity
 5. Google Search
 
+# Executable 
+Download the BuiltApplication.zip, extract it to a folder. Open the folder and click on SprayPaintApp.exe
+
 # Demo
 Video included in the email :)
