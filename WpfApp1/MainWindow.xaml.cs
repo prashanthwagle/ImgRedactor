@@ -201,6 +201,7 @@ namespace SprayPaintApp
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             BrushThickness = mySlider.Value;
+            SetEditAction(EditAction.Spray);
         }
 
         private void SprayClrPickerChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
