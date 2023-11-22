@@ -31,3 +31,4 @@ The editing options are
 
 ## Demo
 
+![SprayPaintDemo_Extended](https://github.com/prashanthwagle/SprayPaintApp/assets/31559029/f16f64f4-7c62-4232-9a81-588e9ab94dae)
