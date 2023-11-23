@@ -29,6 +29,10 @@ The editing options are
 4. Documented the functionality using XML documentation comments
 5. Ensured optimal performance
 
+## Dependencies
+1. Extended.Wpf.Toolkit
+2. FluentWPF
+
 ## References
 These are the online sources I referred to while building the application
 1. https://wpf-tutorial.com/
