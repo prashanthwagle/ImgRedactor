@@ -3,10 +3,12 @@
 ## An application built using C# WPF which enables you to spray paint and edit on images
 
 ## Technical Features
-1. Spray on the image, choose colors from a comprehensive color picker
-2. Erase the sprayed paint
-3. Automatically save the state of the canvas if window is closed
-4. Automatically reload the previous state if window is opened
+1.	The user would be able to select and load an image: JPG, PNG, BMP etc.
+2.	The user would be able to spray paint over an image using a mouse
+3.	The user would be able to change the color and density of the paint
+4.	The user can erase some or all of the spray paint using mouse
+5.	The user will be able to save changes to a new image
+6.	The application state will be persistent i.e., the user can close an unfinished project and reopen it to restore the previous state; the original file would be unaltered.
 
 ## Screenshot
 ![SprayPaintScreenshot](https://github.com/prashanthwagle/SprayPaintApp/assets/31559029/ba6694c0-8a7e-4ef5-a814-ca82d4309dda)
