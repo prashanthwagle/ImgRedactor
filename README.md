@@ -16,7 +16,7 @@
 ![SprayPaintScreenshot](https://github.com/prashanthwagle/SprayPaintApp/assets/31559029/ba6694c0-8a7e-4ef5-a814-ca82d4309dda)
 
 ## Demo Video
-https://myuva-my.sharepoint.com/:v:/g/personal/frk5pa_virginia_edu/EQHyahRbTUZDsLzpFcEM3RMBq4PhznlUKxOo4BwvXTLE8g?e=aIhFnl
+[https://myuva-my.sharepoint.com/:v:/g/personal/frk5pa_virginia_edu/EQHyahRbTUZDsLzpFcEM3RMBq4PhznlUKxOo4BwvXTLE8g?e=aIhFnl](https://myuva-my.sharepoint.com/:v:/g/personal/frk5pa_virginia_edu/EQHyahRbTUZDsLzpFcEM3RMBq4PhznlUKxOo4BwvXTLE8g)
 
 ## Functionality
 As you see in the screenshot, there is a canvas on the right hand side and the various editing option on the right
